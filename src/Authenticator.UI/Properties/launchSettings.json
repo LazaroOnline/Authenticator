@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Authenticator": {
+      "commandName": "Project",
+      //"commandLineArgs": ""
+      //"commandLineArgs": "-CopyToken"
+      "commandLineArgs": ""
+    }
+  }
+}

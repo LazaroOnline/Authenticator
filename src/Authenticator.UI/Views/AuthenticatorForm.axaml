@@ -1,0 +1,116 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:vm="using:Authenticator.ViewModels"
+			 xmlns:views="clr-namespace:Authenticator.Views;assembly=Authenticator"
+			 xmlns:progRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
+			 MinWidth="480" MinHeight="140"
+			 mc:Ignorable="d" d:DesignWidth="550" d:DesignHeight="140"
+			 x:Class="Authenticator.Views.AuthenticatorForm">
+
+	<Design.DataContext>
+		<vm:AuthenticatorViewModel/>
+	</Design.DataContext>
+
+	<UserControl.Styles>
+		<Style Selector="TextBlock">
+			<Setter Property="VerticalAlignment" Value="Center"/>
+		</Style>
+
+		<Style Selector="Button.TextBoxButton">
+			<Setter Property="Height" Value="30"/>
+			<Setter Property="Width" Value="28"/>
+			<Setter Property="Padding" Value="0"/>
+			<Setter Property="HorizontalAlignment" Value="Right"/>
+			<Setter Property="VerticalAlignment" Value="Top"/>
+			<Style Selector="^ TextBlock">
+				<Setter Property="VerticalAlignment" Value="Center"/>
+				<Setter Property="HorizontalAlignment" Value="Center"/>
+			</Style>
+			<Style Selector="^ /template/ ContentPresenter:disabled">
+				<Setter Property="Background" Value="Transparent"/>
+			</Style>
+		</Style>
+
+	</UserControl.Styles>
+
+	<!-- https://avaloniaui.net/docs/layout -->
+	<!-- https://avaloniaui.net/docs/controls/grid -->
+	<Grid Margin="15,15,20,15"
+		ColumnDefinitions="Auto,8,*,8,Auto,8,Auto"
+		RowDefinitions="Auto,8,Auto,8,*">
+
+		<TextBlock Grid.Row="0" Grid.Column="0">Authenticator secret key:</TextBlock>
+		<TextBox Grid.Row="0" Grid.Column="2" Text="{Binding MfaGeneratorSecretKey}"
+				PasswordChar="•"
+				Classes="revealPasswordButton"
+				Watermark="XXXXXXXXXXXXXXXXX"
+				Padding="6,6,24,4"
+				ToolTip.Tip="MFA device secret key."/>
+
+		<Button Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="3"
+			Command="{Binding GenerateTokenCommand}"
+			IsEnabled="{Binding IsEnabledGenerateTokenButton}"
+			HorizontalAlignment="Stretch"
+			HorizontalContentAlignment="Center"
+			ToolTip.Tip="Generate a new token using this app as the device authenticator, requires a valid authenticator secret key of 64 alpha-numeric characters.">
+			Generate Token
+		</Button>
+
+
+		<TextBlock Grid.Row="2" Grid.Column="0">Token-Code:</TextBlock>
+		<Grid Grid.Row="2" Grid.Column="2" RowDefinitions="auto" ColumnDefinitions="*,Auto" >
+			<TextBox Grid.Column="0" Text="{Binding TokenCode}" MaxLength="6" x:Name="TokenTextBox"
+					 ToolTip.Tip="MFA Multi-Factor Authentication code from your phone/device required to get the session token."/>
+
+			<Button Grid.Column="0" Command="{Binding TokenCodeClearCommand}"
+					IsVisible="{Binding TokenCode, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+					Classes="TextBoxButton" Margin="0,1,28,1" Height="31" Background="Transparent">
+				<TextBlock FontSize="10">
+					✕
+				</TextBlock>
+			</Button>
+			<Button Grid.Column="0"
+					Classes="TextBoxButton" Margin="0,1,1,0" Padding="0,-2,0,0" Height="31" Background="Transparent"
+					Command="{Binding CopyTokenCodeCommand}"
+					IsEnabled="{Binding HasTokenCode}"
+					IsVisible="{Binding HasTokenCode}"
+					ToolTip.Tip="Copy">
+				<TextBlock FontSize="19">
+					📋
+				</TextBlock>
+			</Button>
+			<ProgressBar Grid.Column="0" VerticalAlignment="Bottom" Height="6" Value="{Binding TokenTimeLeftPercentage}" Padding="3,0"/>
+		</Grid>
+
+		<Button Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="3"
+				HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+				HorizontalContentAlignment="Center"
+				VerticalContentAlignment="Center"
+				IsEnabled="{Binding HasTokenCode}"
+				Command="{Binding CopyTokenCodeCommand}">
+			Copy Token
+		</Button>
+
+		<Button Grid.Row="4" Grid.Column="6"
+				Click="OpenAboutDialog"
+				VerticalAlignment="Bottom" HorizontalAlignment="Right"
+				Padding="2"
+				ToolTip.Tip="Open 'About' info dialog">
+			<Panel>
+				<TextBlock FontSize="18" VerticalAlignment="Top" HorizontalAlignment="Center">
+					ℹ️
+				</TextBlock>
+			</Panel>
+		</Button>
+
+		<views:AboutView
+			IsVisible="False"
+			x:Name="AboutViewDialog"
+			Grid.ColumnSpan="7"
+			Grid.RowSpan="5"
+		/>
+
+	</Grid>
+</UserControl>

@@ -1,0 +1,15 @@
+﻿global using System;
+global using System.Collections.Generic;
+global using System.Linq;
+global using System.Reactive;
+global using System.Threading.Tasks;
+global using Avalonia;
+global using Avalonia.Controls;
+global using Avalonia.Controls.Templates;
+global using Authenticator.Core;
+global using Authenticator.Core.Models;
+global using Authenticator.Core.Services;
+global using Authenticator.Utils;
+global using Authenticator.ViewModels;
+global using Authenticator.Views;
+global using ReactiveUI;
