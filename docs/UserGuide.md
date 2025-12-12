@@ -3,7 +3,7 @@
 
 
 ## Requirements
-- [DotNet 8.0 Runtime](https://dotnet.microsoft.com/download).
+- [DotNet 10.0 Runtime](https://dotnet.microsoft.com/download).
 
 
 ### UI Mode
