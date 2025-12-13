@@ -1,11 +1,8 @@
 <Application xmlns="https://github.com/avaloniaui"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:local="using:Authenticator"
-			 x:Class="Authenticator.App">
-	<Application.DataTemplates>
-		<local:ViewLocator/>
-	</Application.DataTemplates>
-
+			 x:Class="Authenticator.App"
+			 RequestedThemeVariant="Default">
 	<Application.Styles>
 		<!--<FluentTheme Mode="Dark"/>
 		https://github.com/AvaloniaUI/Avalonia/wiki/Breaking-Changes#avaloniathemesfluent-and-avaloniathemessimple-themes

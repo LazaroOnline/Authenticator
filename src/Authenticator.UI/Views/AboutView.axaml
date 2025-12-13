@@ -40,13 +40,13 @@
 				Developed by A. Lazaro, 2021.
 			</TextBlock>
 			
-			<TextBox TextAlignment="Center" Text="{Binding GitVersion}" />
+			<TextBox TextAlignment="Center" Text="{Binding GitVersion}" FontSize="13"/>
 
 		</StackPanel>
 		
 		<StackPanel Grid.Row="0" Grid.Column="1" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center">
 
-			<Button Command="{Binding OpenLinkLicense}" Classes="DialogButton DialogButtonLink">
+			<Button Command="{Binding OpenLinkLicense}" Classes="DialogButton DialogButtonLink" MinWidth="95">
 				MIT License
 			</Button>
 

@@ -1,6 +1,6 @@
 using System.IO;
 using Splat;
-using Avalonia.ReactiveUI;
+using ReactiveUI.Avalonia;
 using Microsoft.Extensions.Configuration;
 
 namespace Authenticator;
@@ -97,6 +97,7 @@ public class Program
 	public static AppBuilder BuildAvaloniaApp()
 		=> AppBuilder.Configure<App>()
 			.UsePlatformDetect()
+			.WithInterFont()
 			.LogToTrace()
 			.UseReactiveUI();
 
