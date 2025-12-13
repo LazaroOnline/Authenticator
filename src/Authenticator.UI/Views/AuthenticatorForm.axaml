@@ -37,7 +37,7 @@
 
 	<!-- https://avaloniaui.net/docs/layout -->
 	<!-- https://avaloniaui.net/docs/controls/grid -->
-	<Grid Margin="15,15,20,15"
+	<Grid Margin="10,10,15,10"
 		ColumnDefinitions="Auto,8,*,8,Auto,8,Auto"
 		RowDefinitions="Auto,8,Auto,8,*">
 

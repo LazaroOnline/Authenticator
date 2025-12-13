@@ -2,10 +2,15 @@
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-			 mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="170"
+			 mc:Ignorable="d" d:DesignWidth="540" d:DesignHeight="210"
 			 x:Class="Authenticator.Views.AboutView">
 
 	<UserControl.Styles>
+		<Style Selector="TextBox">
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="BorderThickness" Value="0"/>
+			<Setter Property="IsReadOnly" Value="True"/>
+		</Style>
 		<Style Selector="Button.DialogButton">
 			<Setter Property="Margin" Value="3"/>
 			<Setter Property="Height" Value="40"/>
@@ -22,7 +27,7 @@
 		</Style>
 	</UserControl.Styles>
 
-	<Grid RowDefinitions="*" ColumnDefinitions="*,*">
+	<Grid RowDefinitions="*" ColumnDefinitions="*,Auto">
 		<Border Grid.Row="0" Grid.ColumnSpan="2" Background="{DynamicResource SystemRegionColor}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
 		<Border Grid.Row="0" Grid.ColumnSpan="2" Background="#111" Opacity="0.3"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
 		<StackPanel Grid.Row="0" Grid.Column="0" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -35,7 +40,7 @@
 				Developed by A. Lazaro, 2021.
 			</TextBlock>
 			
-			<TextBlock TextAlignment="Center" Text="{Binding GitVersion}" />
+			<TextBox TextAlignment="Center" Text="{Binding GitVersion}" />
 
 		</StackPanel>
 		
