@@ -6,6 +6,7 @@
 		<Nullable>enable</Nullable>
 		<RootNamespace>Authenticator</RootNamespace>
 		<AssemblyName>Authenticator</AssemblyName>
+		<PublishSingleFile>true</PublishSingleFile>
 		<ApplicationIcon>App.ico</ApplicationIcon>
 		<UserSecretsId>e20972f0-cd50-41f3-b846-416d0fe296cc</UserSecretsId>
 	</PropertyGroup>
@@ -22,11 +23,11 @@
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Avalonia" Version="11.3.9" />
+		<PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.9" />
+		<PackageReference Include="Avalonia.ReactiveUI" Version="11.3.8" />
 		<PackageReference Include="Avalonia.Desktop" Version="11.3.9" />
 		<!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
 		<PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.3.9" />
-		<PackageReference Include="Avalonia.ReactiveUI" Version="11.3.8" />
-		<PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.9" />
 		<PackageReference Include="Jot" Version="2.1.17" />
 		<PackageReference Include="GitVersion.MsBuild" Version="6.5.1">
 			<PrivateAssets>all</PrivateAssets>

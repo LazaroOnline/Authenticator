@@ -5,7 +5,7 @@ namespace Authenticator.Core.Services;
 public static class CurrentApp
 {
 
-	public static string GetLocation()
+	public static string? GetLocation()
 	{
 		return Environment.ProcessPath;
 

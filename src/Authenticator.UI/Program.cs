@@ -77,13 +77,16 @@ public class Program
 	{
 		FileLogger.Log($"Running command-line {commandName}");
 		var viewModel = Splat.Locator.Current.GetService<AuthenticatorViewModel>();
+		if (viewModel == null ) {
+			throw new ArgumentNullException($"Failed to find the viewmodel for {nameof(AuthenticatorViewModel)}.");
+		}
 		try {
 			await action(viewModel);
 		} catch (Exception ex) {
 			FileLogger.Log($"Error: Unhandled exception: " + ex);
 		}
-		Console.WriteLine(viewModel.Logs);
-		if (!string.IsNullOrWhiteSpace(viewModel.Logs))
+		Console.WriteLine(viewModel?.Logs);
+		if (!string.IsNullOrWhiteSpace(viewModel?.Logs))
 		{
 			FileLogger.Log("Logs: " + viewModel.Logs);
 		}

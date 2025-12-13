@@ -22,7 +22,7 @@ public partial class MainWindow : Window
 	{
 		base.OnClosing(e);
 		var authenticatorForm = this.FindControl<AuthenticatorForm>("AuthenticatorForm");
-		var viewModel = (AuthenticatorViewModel)authenticatorForm.DataContext;
-		viewModel.SaveConfig();
+		var viewModel = (AuthenticatorViewModel?)authenticatorForm?.DataContext;
+		viewModel?.SaveConfig();
 	}
 }

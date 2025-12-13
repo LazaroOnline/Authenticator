@@ -34,8 +34,8 @@ public class GitVersionAssemblyInfo
 
 	public const string GitVersionPendingPrefix = "--pending-"; // Same as defined in the "GitVersion.yml" file.
 
-	public static string ToMultilineInformationalVersion(string informationalVersion)
+	public static string? ToMultilineInformationalVersion(string? informationalVersion)
 	{
-		return informationalVersion.Replace(GitVersionPendingPrefix, $"{Environment.NewLine}pending-");
+		return informationalVersion?.Replace(GitVersionPendingPrefix, $"{Environment.NewLine}pending-");
 	}
 }
