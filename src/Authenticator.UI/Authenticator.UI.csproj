@@ -9,6 +9,7 @@
 		<PublishSingleFile>true</PublishSingleFile>
 		<ApplicationIcon>App.ico</ApplicationIcon>
 		<UserSecretsId>e20972f0-cd50-41f3-b846-416d0fe296cc</UserSecretsId>
+		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
 	</PropertyGroup>
 
 	<ItemGroup>

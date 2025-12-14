@@ -6,32 +6,44 @@ cd "$scriptFolder/.."
 Write-Host -F Blue "Changed dir to: '$PWD'"
 
 
+# CONFIG:
+$csprojPath = "src/Authenticator.UI/Authenticator.UI.csproj"
+$appFileName = "Authenticator" # .exe
 $publishFolder = "Publish"
 $publishFolderApp = "$publishFolder/app"
+
 
 # CLEANUP:
 Write-Host -F Blue "Cleaning up folders: '$publishFolderApp' and '$publishFolderDotnetTool'..."
 if (test-path $publishFolderApp) { Remove-Item "$publishFolderApp/*" -Force -Recurse; Write-Host -F Yellow "Removed folder: $publishFolderApp" }
 Write-Host -F Blue "Starting compilation..."
 
+
 # COMPILE AS EXE:
 # https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-publish
 Write-Host -F Blue "Publishing app..."
-dotnet publish "src/Authenticator.UI/Authenticator.UI.csproj" `
+dotnet publish $csprojPath `
 --self-contained false `
 -o $publishFolderApp `
 -c "Release" `
 -p:DebugType=None `
 -p:EnableCompressionInSingleFile=false `
+-p:PublishAot=false `
 -p:PublishTrimmed=false `
 -p:PublishSingleFile=true 
+# Can't enable "PublishTrimmed" trimming with "Jot" library used in "WindowStateTracker.cs", "ReactiveUI.WhenAnyMixin.WhenAnyValue<>()" and "System.Text.Json.JsonSerializer.Serialize<>()".
 # -r "win-x64" 
+$compiledAppFile = Get-Item "$publishFolderApp/$appFileName.exe" -ErrorAction SilentlyContinue
+if ($compiledAppFile -eq $null) {
+	Write-Host -F Red "Error compiling/publishing ('$appFileName.exe' not created)."
+	return
+}
 Write-Host -F Green "Publishing app DONE!"
 
 
 # COMPRESS TO ZIP:
-$version = (Get-Item "$publishFolderApp/Authenticator.exe").VersionInfo.FileVersion
-$destinationZip = "$publishFolder/Authenticator-v$version.zip"
+$version = $compiledAppFile.VersionInfo.FileVersion
+$destinationZip = "$publishFolder/$appFileName-v$version.zip"
 Write-Host -F Blue "Compressing binaries into: '$destinationZip'..."
 # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.archive/compress-archive?view=powershell-7.3
 Compress-Archive -Path "$publishFolderApp/*" -DestinationPath $destinationZip -Force
