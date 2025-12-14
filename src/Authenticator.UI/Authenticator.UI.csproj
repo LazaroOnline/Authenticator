@@ -10,6 +10,8 @@
 		<ApplicationIcon>App.ico</ApplicationIcon>
 		<UserSecretsId>e20972f0-cd50-41f3-b846-416d0fe296cc</UserSecretsId>
 		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+		<!--Use the second version number to match the dotnet version-->
+		<FileVersion>1.10.0.0</FileVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
