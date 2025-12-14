@@ -40,17 +40,17 @@
 	<!-- https://avaloniaui.net/docs/controls/grid -->
 	<Grid Margin="10,10,15,10"
 		ColumnDefinitions="Auto,8,*,8,Auto,8,Auto"
-		RowDefinitions="Auto,8,Auto,8,*">
+		RowDefinitions="*,Auto,12,Auto,8,2*">
 
-		<TextBlock Grid.Row="0" Grid.Column="0">Authenticator secret key:</TextBlock>
-		<TextBox Grid.Row="0" Grid.Column="2" Text="{Binding MfaGeneratorSecretKey}"
+		<TextBlock Grid.Row="1" Grid.Column="0">Authenticator secret key:</TextBlock>
+		<TextBox Grid.Row="1" Grid.Column="2" Text="{Binding MfaGeneratorSecretKey}"
 				PasswordChar="•"
 				Classes="revealPasswordButton"
 				Watermark="XXXXXXXXXXXXXXXXX"
 				Padding="6,6,24,4"
 				ToolTip.Tip="MFA device secret key."/>
 
-		<Button Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="3"
+		<Button Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="3"
 			Command="{Binding GenerateTokenCommand}"
 			IsEnabled="{Binding IsEnabledGenerateTokenButton}"
 			HorizontalAlignment="Stretch"
@@ -60,8 +60,8 @@
 		</Button>
 
 
-		<TextBlock Grid.Row="2" Grid.Column="0">Token-Code:</TextBlock>
-		<Grid Grid.Row="2" Grid.Column="2" RowDefinitions="auto" ColumnDefinitions="*,Auto" >
+		<TextBlock Grid.Row="3" Grid.Column="0">Token-Code:</TextBlock>
+		<Grid Grid.Row="3" Grid.Column="2" RowDefinitions="auto" ColumnDefinitions="*,Auto" >
 			<TextBox Grid.Column="0" Text="{Binding TokenCode}" MaxLength="6" x:Name="TokenTextBox"
 					 ToolTip.Tip="MFA Multi-Factor Authentication code from your phone/device required to get the session token."/>
 
@@ -85,7 +85,7 @@
 			<ProgressBar Grid.Column="0" VerticalAlignment="Bottom" Height="6" Value="{Binding TokenTimeLeftPercentage}" Padding="3,0"/>
 		</Grid>
 
-		<Button Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="3"
+		<Button Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="3"
 				HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
 				HorizontalContentAlignment="Center"
 				VerticalContentAlignment="Center"
@@ -94,7 +94,7 @@
 			Copy Token
 		</Button>
 
-		<Button Grid.Row="4" Grid.Column="6"
+		<Button Grid.Row="5" Grid.Column="6"
 				Click="OpenAboutDialog"
 				VerticalAlignment="Bottom" HorizontalAlignment="Right"
 				Padding="2"
@@ -110,7 +110,7 @@
 			IsVisible="False"
 			x:Name="AboutViewDialog"
 			Grid.ColumnSpan="7"
-			Grid.RowSpan="5"
+			Grid.RowSpan="6"
 		/>
 
 	</Grid>
