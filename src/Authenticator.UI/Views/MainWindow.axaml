@@ -12,7 +12,7 @@
 		Title="Authenticator">
 
 	<ScrollViewer>
-		<views:AuthenticatorForm x:Name="AuthenticatorForm" Grid.Row="1" />
+		<views:AuthenticatorForm Grid.Row="1" />
 	</ScrollViewer>
 
 </Window>

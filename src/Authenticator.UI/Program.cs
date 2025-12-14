@@ -1,4 +1,3 @@
-using System.IO;
 using Splat;
 using ReactiveUI.Avalonia;
 using Microsoft.Extensions.Configuration;
@@ -41,6 +40,14 @@ public class Program
 	public static void Main(string[] args)
 	{
 		Console.WriteLine($"Starting {nameof(Authenticator)} app...");
+		AppDomain.CurrentDomain.UnhandledException += (s, e) => {
+			var ex = e.ExceptionObject as Exception;
+			FileLogger.Log($"Crashed App error:{Environment.NewLine}{ex}");
+		};
+		TaskScheduler.UnobservedTaskException += (s, e) => {
+			FileLogger.Log($"Crashed Task error:{Environment.NewLine}{e.Exception}");
+			e.SetObserved();
+		};
 
 		if (IsHelpCommand(args)) {
 			DisplayHelp();
@@ -48,7 +55,7 @@ public class Program
 		}
 
 		var configBuilder = new ConfigurationBuilder()
-			.SetBasePath(GetExecutingDir())
+			.SetBasePath(AppContext.BaseDirectory)
 			.AddJsonFile(AppSettings.FILENAME, optional: true)
 			.AddUserSecrets<Program>(optional: true)
 			.AddCommandLine(args, CommandlineShortKeyMap);
@@ -100,12 +107,6 @@ public class Program
 			.WithInterFont()
 			.LogToTrace()
 			.UseReactiveUI();
-
-
-	public static string GetExecutingDir()
-	{
-		return System.AppContext.BaseDirectory ?? Directory.GetCurrentDirectory();
-	}
 
 	// https://www.reactiveui.net/docs/handbook/dependency-inversion/
 	// https://dev.to/ingvarx/avaloniaui-dependency-injection-4aka

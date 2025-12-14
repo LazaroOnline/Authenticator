@@ -6,7 +6,7 @@
 			 xmlns:views="clr-namespace:Authenticator.Views;assembly=Authenticator"
 			 xmlns:progRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
 			 MinWidth="480" MinHeight="140"
-			 mc:Ignorable="d" d:DesignWidth="550" d:DesignHeight="140"
+			 mc:Ignorable="d" d:DesignWidth="550" d:DesignHeight="190"
 			 x:DataType="vm:AuthenticatorViewModel"
 			 x:Class="Authenticator.Views.AuthenticatorForm">
 

@@ -10,19 +10,12 @@ public partial class MainWindow : Window
 #if DEBUG
 		this.AttachDevTools();
 #endif
-		WindowStateTracker.TrackWindow(this);
+		WindowStateTracker.TryTrackWindow(this);
+		this.Closing += (_, _) => { }; // This is just to prevent dotnet trimming from removing the "Closing" event from the Avalonia Window class.
 	}
 
 	private void InitializeComponent()
 	{
 		AvaloniaXamlLoader.Load(this);
-	}
-
-	protected override void OnClosing(WindowClosingEventArgs e)
-	{
-		base.OnClosing(e);
-		var authenticatorForm = this.FindControl<AuthenticatorForm>("AuthenticatorForm");
-		var viewModel = (AuthenticatorViewModel?)authenticatorForm?.DataContext;
-		viewModel?.SaveConfig();
 	}
 }

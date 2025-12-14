@@ -11,10 +11,17 @@ public partial class AuthenticatorForm : UserControl
 		{
 			TokenTextBox.AttachedToVisualTree += (s, e) => TokenTextBox.Focus();
 		}
+		this.Unloaded += (_, _) => OnUnloadedSaveConfig();
 	}
 
 	public void OpenAboutDialog(object sender, RoutedEventArgs args)
 	{
 		this.AboutViewDialog.IsVisible = true;
+	}
+
+	public void OnUnloadedSaveConfig()
+	{
+		var viewModel = (AuthenticatorViewModel?)this.DataContext;
+		viewModel?.SaveConfig();
 	}
 }
