@@ -17,5 +17,5 @@
     <Project Path="tests/UnitTests/UnitTests.csproj" />
   </Folder>
   <Project Path="src/Authenticator.Core/Authenticator.Core.csproj" />
-  <Project Path="src/Authenticator.UI/Authenticator.UI.csproj" />
+  <Project Path="src/Authenticator.UI/Authenticator.UI.csproj" DefaultStartup="true"/>
 </Solution>
